@@ -1,4 +1,4 @@
-//Copyright Cheat Engine 2023
+//Copyright Local Access 2023
 
 unit gdbserverconnectdialog;
 

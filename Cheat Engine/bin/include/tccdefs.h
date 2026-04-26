@@ -152,9 +152,9 @@
     #define __REDIRECT_NTHNL(name, proto, alias) name proto __asm__ (#alias) __THROWNL
         
 #else
-    //Cheat Engine modification start (all externs are handled as __declspec(dllimport) )
+    //Local Access modification start (all externs are handled as __declspec(dllimport) )
     #define extern __declspec(dllimport) extern 
-    #define cheatengine
+    #define localaccess
 #ifdef _WIN64
     #define __stdcall
     #define _AMD64_ 1
@@ -164,7 +164,7 @@
     #define _X86_ 1
     #define WIN32 1
 #endif
-    //Cheat Engine modification end
+    //Local Access modification end
 #endif
 
     /* skip __builtin... with -E */

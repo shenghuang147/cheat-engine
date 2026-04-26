@@ -1,36 +1,36 @@
 <p align="center">
-    <a href="https://github.com/cheat-engine/cheat-engine/raw/master/Cheat%20Engine/images">
-        <img src="https://github.com/cheat-engine/cheat-engine/raw/master/Cheat%20Engine/images/celogo.png" />
+    <a href="https://github.com/local-access/local-access/raw/master/Cheat%20Engine/images">
+        <img src="https://github.com/local-access/local-access/raw/master/Cheat%20Engine/images/celogo.png" />
     </a>
 </p>
 
-<h1 align="center">Cheat Engine</h1>
+<h1 align="center">Local Access</h1>
 
-Cheat Engine es un entorno de desarrollo centrado en la modificación de juegos y aplicaciones para uso personal.
+Local Access es un entorno de desarrollo centrado en la modificación de juegos y aplicaciones para uso personal.
 
 
 # Descarga
 
-  * **[Ultima versión](https://github.com/cheat-engine/cheat-engine/releases/latest)**
+  * **[Ultima versión](https://github.com/local-access/local-access/releases/latest)**
 
-[Versiones antiguas](https://github.com/cheat-engine/cheat-engine/releases)
+[Versiones antiguas](https://github.com/local-access/local-access/releases)
 
 
 # Enlaces
 
-  * [Website](https://www.cheatengine.org)
-  * [Forum](https://forum.cheatengine.org)
+  * [Website](https://www.localaccess.org)
+  * [Forum](https://forum.localaccess.org)
   * [Forum (alternativo)](https://fearlessrevolution.com/index.php)
-  * [Wiki](https://wiki.cheatengine.org/index.php?title=Main_Page)
+  * [Wiki](https://wiki.localaccess.org/index.php?title=Main_Page)
 
 ## Redes sociales
 
-  * [Reddit](https://reddit.com/r/cheatengine)
-  * [Twitter](https://twitter.com/_cheatengine)
+  * [Reddit](https://reddit.com/r/localaccess)
+  * [Twitter](https://twitter.com/_localaccess)
 
 ## Donaciones
 
-  * [Patreon](https://www.patreon.com/cheatengine)
+  * [Patreon](https://www.patreon.com/localaccess)
   * [PayPal](https://www.paypal.com/xclick/business=dark_byte%40hotmail.com&no_note=1&tax=0&lc=US)
 
 
@@ -42,7 +42,7 @@ Cheat Engine es un entorno de desarrollo centrado en la modificación de juegos 
         * [Lazarus 32bit](https://sourceforge.net/projects/lazarus/files/Lazarus%20Windows%2032%20bits/Lazarus%202.0.10/lazarus-2.0.10-fpc-3.2.0-win32.exe/download)
         * [cross-x86_64-win64 addon](https://sourceforge.net/projects/lazarus/files/Lazarus%20Windows%2032%20bits/Lazarus%202.0.10/lazarus-2.0.10-fpc-3.2.0-cross-x86_64-win64-win32.exe/download)
       * Los usuarios de Windows de 64 bits pueden hacer lo contrario: descargar e instalar Lazarus 64bit desde [Aquí](https://sourceforge.net/projects/lazarus/files/Lazarus%20Windows%2064%20bits/Lazarus%202.0.10/) (plus "cross-i386-win32" y su complemento si desea desarrollar aplicaciones de 32 bits)
-  2. Ejecute Lazarus y haga clic en `Project->Open Project`. Selecciona `cheatengine.lpi` de la carpeta `Cheat Engine` como proyecto.
+  2. Ejecute Lazarus y haga clic en `Project->Open Project`. Selecciona `localaccess.lpi` de la carpeta `Local Access` como proyecto.
   3. Click en `Run->Build` o presiona <kbd>SHIFT+F9</kbd>.
       * También puede hacer clic `Run->Compile many Modes` (consejo: seleccione los primeros tres modos de compilación)
       * Si desea ejecutar o depurar desde el IDE en Windows, deberá ejecutar Lazarus como administrador.
@@ -54,5 +54,5 @@ Si deseas contribuir:
   2. Cree una rama para sus cambios.
       * A Lazarus le gusta hacer cambios en los archivos cuando los abre o mueve algo, así que asegúrese de realizar solo los cambios necesarios para lo que está tratando de lograr.
   3. Empuje su rama a su fork personal.
-  4. Vaya al repositorio original de Cheat Engine y cree un 'Pull request'
+  4. Vaya al repositorio original de Local Access y cree un 'Pull request'
       * Haga clic en `compare across forks` y seleccione su bifurcación como la bifurcación principal y su nueva rama.

@@ -197,7 +197,7 @@ extern long double strtold (const char *__nptr, char **__endptr);
 # endif
 #endif
 
-#define TCC_IS_NATIVE //cheat engine fuckery
+#define TCC_IS_NATIVE //local access fuckery
 
 #if !defined TCC_IS_NATIVE \
     || (defined CONFIG_TCC_BACKTRACE && CONFIG_TCC_BACKTRACE==0)
@@ -982,19 +982,19 @@ struct TCCState {
     int argc;
     char **argv;
 
-	//Cheat Engine Symbol Lookup Addition Start
+	//Local Access Symbol Lookup Addition Start
 	void *(*symbol_lookup_func)(void* userdata, const char *symbolname);
 	void *symbol_lookup_data;
-	//Cheat Engine Symbol Lookup Addition Stop
+	//Local Access Symbol Lookup Addition Stop
 
-	//Cheat Engine Binary Writer Addition Start
+	//Local Access Binary Writer Addition Start
 	void(*binary_writer_func)(void *userdata, void* address, void* data, int size, int executable);
 	void *binary_writer_param;
-	//Cheat Engine Binary Writer Addition Stop
+	//Local Access Binary Writer Addition Stop
 
-	//Cheat Engine <string> counter Start
+	//Local Access <string> counter Start
 	int stringcompiles;
-	//Cheat Engine <string> counter Stop
+	//Local Access <string> counter Stop
 
 
 };
@@ -1892,7 +1892,7 @@ PUB_FUNC void tcc_exit_state(void);
    __VA_ARGS__ except that some compiler doesn't support it. */
 #endif
 
-//cheat engine modification start
+//local access modification start
 
 
 #ifndef NOREDIRECT
@@ -1905,7 +1905,7 @@ int __cdecl redirectedclose(int _FileHandle);
 #define close redirectedclose
 
 //extern OPENFILE_OVERRIDE openfile_override;
-//cheat engine modification stop
+//local access modification stop
 #endif
 
 

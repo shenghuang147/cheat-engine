@@ -280,7 +280,7 @@ begin
       MainForm.frmLuaTableScript.assemblescreen.BeginUpdate;
       MainForm.frmLuaTableScript.assemblescreen.Lines.Insert(0, 'RequiredCEVersion='+floattostr(ceversion));
       MainForm.frmLuaTableScript.assemblescreen.Lines.Insert(1, 'if (getCEVersion==nil) or (getCEVersion()<RequiredCEVersion) then');
-      MainForm.frmLuaTableScript.assemblescreen.Lines.Insert(2, '  messageDialog(''Please install '+strCheatEngine+' ''..RequiredCEVersion, mtError, mbOK)');
+      MainForm.frmLuaTableScript.assemblescreen.Lines.Insert(2, '  messageDialog(''Please install '+strLocalAccess+' ''..RequiredCEVersion, mtError, mbOK)');
       MainForm.frmLuaTableScript.assemblescreen.Lines.Insert(3, '  closeCE()');
       MainForm.frmLuaTableScript.assemblescreen.Lines.Insert(4, 'end');
     end;
@@ -309,13 +309,13 @@ begin
     try
       if tiny then basefile:='tiny' else basefile:='standalonephase1';
 
-      if (fileexists(cheatenginedir+basefile+'.dat')=false) then
+      if (fileexists(localaccessdir+basefile+'.dat')=false) then
       begin
-        if (fileexists(cheatenginedir+basefile+'.cepack')) then
-          ceunpackfile(cheatenginedir+basefile+'.cepack', cheatenginedir+basefile+'.dat', true);
+        if (fileexists(localaccessdir+basefile+'.cepack')) then
+          ceunpackfile(localaccessdir+basefile+'.cepack', localaccessdir+basefile+'.dat', true);
       end;
 
-      if CopyFile(cheatenginedir+basefile+'.dat', filename) then
+      if CopyFile(localaccessdir+basefile+'.dat', filename) then
       begin
         updatehandle:=BeginUpdateResourceA(pchar(filename), false);
         if updatehandle<>0 then
@@ -341,11 +341,11 @@ begin
 
             decompressor:=TMemorystream.create;
 
-            if (fileexists(cheatenginedir+'standalonephase2.dat')=false) and
-               (fileexists(cheatenginedir+'standalonephase2.cepack')) then
-              ceunpackfile(cheatenginedir+'standalonephase2.cepack', cheatenginedir+'standalonephase2.dat', true);
+            if (fileexists(localaccessdir+'standalonephase2.dat')=false) and
+               (fileexists(localaccessdir+'standalonephase2.cepack')) then
+              ceunpackfile(localaccessdir+'standalonephase2.cepack', localaccessdir+'standalonephase2.dat', true);
 
-            decompressor.LoadFromFile(cheatenginedir+'standalonephase2.dat');
+            decompressor.LoadFromFile(localaccessdir+'standalonephase2.dat');
 
             addfile(CETRAINER);
             deletefile(cetrainer);
@@ -354,85 +354,85 @@ begin
             for i:=0 to listview1.Items.Count-1 do
               addfile(TFileData(listview1.items[i].data).filepath, TFileData(listview1.items[i].data).folder);
 
-            addfile(cheatenginedir+'defines.lua');
+            addfile(localaccessdir+'defines.lua');
 
             if rb32.checked then
             begin
-              addfile(cheatenginedir+'cheatengine-i386.exe');
+              addfile(localaccessdir+'localaccess-i386.exe');
 
-              addfile(cheatenginedir+'lua53-32.dll');
-              addfile(cheatenginedir+'win32\dbghelp.dll','win32');
+              addfile(localaccessdir+'lua53-32.dll');
+              addfile(localaccessdir+'win32\dbghelp.dll','win32');
 
               if cbSpeedhack.checked then
-                addfile(cheatenginedir+'speedhack-i386.dll');
+                addfile(localaccessdir+'speedhack-i386.dll');
 
               if cbvehdebug.checked then
-                addfile(cheatenginedir+'vehdebug-i386.dll');
+                addfile(localaccessdir+'vehdebug-i386.dll');
 
               if cbKernelDebug.checked then
               begin
-                addfile(cheatenginedir+'dbk32.sys');
-                addfile(cheatenginedir+'dbk64.sys');
-                addfile(cheatenginedir+'cheatengine-i386.exe.sig');
+                addfile(localaccessdir+'dbk32.sys');
+                addfile(localaccessdir+'dbk64.sys');
+                addfile(localaccessdir+'localaccess-i386.exe.sig');
               end;
 
               if cbModPlayer.checked then
-                addfile(cheatenginedir+'libmikmod32.dll');
+                addfile(localaccessdir+'libmikmod32.dll');
 
 
               if cbCCode.checked then
-                addfile(cheatenginedir+'tcc32-32.dll');
+                addfile(localaccessdir+'tcc32-32.dll');
             end
             else
             begin
-              addfile(cheatenginedir+'cheatengine-x86_64.exe');
-              addfile(cheatenginedir+'lua53-64.dll');
+              addfile(localaccessdir+'localaccess-x86_64.exe');
+              addfile(localaccessdir+'lua53-64.dll');
 
               if cbSpeedhack.checked then
-                addfile(cheatenginedir+'speedhack-x86_64.dll');
+                addfile(localaccessdir+'speedhack-x86_64.dll');
 
               if cbvehdebug.checked then
-                addfile(cheatenginedir+'vehdebug-x86_64.dll');
+                addfile(localaccessdir+'vehdebug-x86_64.dll');
 
               if cbKernelDebug.checked then
               begin
-                addfile(cheatenginedir+'dbk64.sys');
-                addfile(cheatenginedir+'cheatengine-x86_64.exe.sig');
+                addfile(localaccessdir+'dbk64.sys');
+                addfile(localaccessdir+'localaccess-x86_64.exe.sig');
               end;
 
               if cbModPlayer.checked then
-                addfile(cheatenginedir+'libmikmod64.dll');
+                addfile(localaccessdir+'libmikmod64.dll');
 
               if cbCCode.checked then
-                addfile(cheatenginedir+'tcc64-64.dll');
+                addfile(localaccessdir+'tcc64-64.dll');
             end;
 
             if cbIncludes.checked then
-              addfolder(cheatenginedir+'include','include');
+              addfolder(localaccessdir+'include','include');
 
 
             if cbDotNet.checked then
             begin
-              addfile(cheatenginedir+'DotNetDataCollector32.exe');
-              addfile(cheatenginedir+'DotNetDataCollector64.exe');
+              addfile(localaccessdir+'DotNetDataCollector32.exe');
+              addfile(localaccessdir+'DotNetDataCollector64.exe');
             end;
 
             if cbD3DHook.checked then
             begin
-              addfile(cheatenginedir+'overlay.fx');
+              addfile(localaccessdir+'overlay.fx');
               if rb32.checked then
               begin
-                addfile(cheatenginedir+'d3dhook.dll');
-                addfile(cheatenginedir+'ced3d9hook.dll');
-                addfile(cheatenginedir+'ced3d10hook.dll');
-                addfile(cheatenginedir+'ced3d11hook.dll');
+                addfile(localaccessdir+'d3dhook.dll');
+                addfile(localaccessdir+'ced3d9hook.dll');
+                addfile(localaccessdir+'ced3d10hook.dll');
+                addfile(localaccessdir+'ced3d11hook.dll');
               end
               else
               begin
-                addfile(cheatenginedir+'d3dhook64.dll');
-                addfile(cheatenginedir+'ced3d9hook64.dll');
-                addfile(cheatenginedir+'ced3d10hook64.dll');
-                addfile(cheatenginedir+'ced3d11hook64.dll');
+                addfile(localaccessdir+'d3dhook64.dll');
+                addfile(localaccessdir+'ced3d9hook64.dll');
+                addfile(localaccessdir+'ced3d10hook64.dll');
+                addfile(localaccessdir+'ced3d11hook64.dll');
               end;
             end;
 
@@ -564,7 +564,7 @@ begin
         showmessage(rsTheTrainerHasBeenSuccessfullyGenerated);
       end
       else
-        showMessage(Format(rsTrainerFileMissing, [cheatenginedir+basefile, filename]));
+        showMessage(Format(rsTrainerFileMissing, [localaccessdir+basefile, filename]));
 
 
     finally
@@ -631,7 +631,7 @@ begin
   f.filename:=extractfilename(fn);
 
   d:=ExtractFilePath(fn);
-  d:=ExtractRelativepath(cheatenginedir, d);
+  d:=ExtractRelativepath(localaccessdir, d);
   if (pos(':', d)>0) or (pos('..', d)>0) then
     d:='';
 
@@ -744,8 +744,8 @@ begin
   comboCompression.itemindex:=3;
 
 
-  OpenDialog1.InitialDir:=CheatEngineDir;
-  SelectDirectoryDialog1.InitialDir:=CheatEngineDir;
+  OpenDialog1.InitialDir:=LocalAccessDir;
+  SelectDirectoryDialog1.InitialDir:=LocalAccessDir;
 
   //scan the current script for markers that might indicate a used feature
   s:=lowercase(mainform.frmLuaTableScript.assemblescreen.Text);

@@ -1,4 +1,4 @@
-//Copyright Cheat Engine
+//Copyright Local Access
 
 unit dotnethost;
 

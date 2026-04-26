@@ -1,4 +1,4 @@
-// Copyright Cheat Engine. All Rights Reserved.
+// Copyright Local Access. All Rights Reserved.
 
 
 unit CEFuncProc;
@@ -6,7 +6,7 @@ unit CEFuncProc;
 {$MODE Delphi}
 
 //This version of CEFuncProc has been COPIED to the server dir
-//Cheat Engine regular WONT look at this
+//Local Access regular WONT look at this
 
 interface
 
@@ -292,7 +292,7 @@ type TScanSettings = record
   scan_mem_mapped: boolean;
   scanvalue: string[255];
   scanvalue2: string[255];
-  CheatEngineDir: string[255];
+  LocalAccessDir: string[255];
   buffersize:dword;
   priority:integer;
   nrofbits:integer;
@@ -1961,13 +1961,13 @@ var
 
 
 begin
-  assignfile(memoryfile,CheatEngineDir+'Memory.TMP');
-  assignfile(addressfile,CheatEngineDir+'Addresses.TMP');
+  assignfile(memoryfile,LocalAccessDir+'Memory.TMP');
+  assignfile(addressfile,LocalAccessDir+'Addresses.TMP');
   reset(memoryfile,1);
   reset(addressfile,1);
 
-  assignfile(newmemoryfile,CheatEngineDir+'Memory2.TMP');
-  assignfile(newaddressfile,CheatEngineDir+'Address2.TMP');
+  assignfile(newmemoryfile,LocalAccessDir+'Memory2.TMP');
+  assignfile(newaddressfile,LocalAccessDir+'Address2.TMP');
   rewrite(newmemoryfile,1);
   rewrite(newaddressfile,1);
 
@@ -2168,12 +2168,12 @@ begin
   closefile(newmemoryfile);
   closefile(newaddressfile);
 
-  deletefile(CheatEngineDir+'Memory.UNDO');
-  deletefile(CheatEngineDir+'Addresses.UNDO');
-  renamefile(CheatEngineDir+'Memory.tmp',cheatenginedir+'Memory.UNDO');
-  renamefile(CheatEngineDir+'Addresses.tmp',CheatEngineDir+'Addresses.UNDO');
-  renamefile(CheatEngineDir+'Memory2.tmp',CheatEngineDir+'Memory.TMP');
-  Renamefile(CheatengineDir+'Address2.TMP',CheatEngineDir+'Addresses.TMP');
+  deletefile(LocalAccessDir+'Memory.UNDO');
+  deletefile(LocalAccessDir+'Addresses.UNDO');
+  renamefile(LocalAccessDir+'Memory.tmp',localaccessdir+'Memory.UNDO');
+  renamefile(LocalAccessDir+'Addresses.tmp',LocalAccessDir+'Addresses.UNDO');
+  renamefile(LocalAccessDir+'Memory2.tmp',LocalAccessDir+'Memory.TMP');
+  Renamefile(LocalaccessDir+'Address2.TMP',LocalAccessDir+'Addresses.TMP');
 
 
 end;
@@ -2262,7 +2262,7 @@ end;   }
 
 function GetUserNameFromPID(ProcessId: DWORD): string;
 //credits to Alice0725
-//http://forum.cheatengine.org/viewtopic.php?t=564382
+//http://forum.localaccess.org/viewtopic.php?t=564382
 {$IFDEF windows}
 type
   PTOKEN_USER = ^TOKEN_USER;
@@ -2725,8 +2725,8 @@ var
   AMalloc: IMalloc;
 {$ENDIF}
 begin
-  CheatEngineDir:=ExtractFilePath(application.ExeName);
-  result:=CheatEngineDir;
+  LocalAccessDir:=ExtractFilePath(application.ExeName);
+  result:=LocalAccessDir;
 
   {$IFDEF windows}
   //blatantly stolen from http://www.scalabium.com/faq/dct0106.htm
@@ -2764,10 +2764,10 @@ end;
 Procedure Shutdown;
 //This will erase the temporary files and close the processhandle (In case it doesnt happen automatically)
 begin
-  deletefile(CheatEngineDir+'Memory.TMP');
-  deletefile(CheatEngineDir+'Addresses.TMP');
-  deletefile(CheatEngineDir+'Memory.UNDO');
-  deletefile(CheatEngineDir+'Addresses.UNDO');
+  deletefile(LocalAccessDir+'Memory.TMP');
+  deletefile(LocalAccessDir+'Addresses.TMP');
+  deletefile(LocalAccessDir+'Memory.UNDO');
+  deletefile(LocalAccessDir+'Addresses.UNDO');
   freemem(memory);
   memory:=nil;
  // Closehandle(processhandle);
@@ -3046,13 +3046,13 @@ begin
     reg:=tregistry.create;
     try
       Reg.RootKey := HKEY_CURRENT_USER;
-      if Reg.OpenKey('\Software\'+strCheatEngine,false) then
+      if Reg.OpenKey('\Software\'+strLocalAccess,false) then
       begin
         if reg.valueexists('Save window positions') then
           if reg.readbool('Save window positions') = false then exit;
       end;
 
-      if Reg.OpenKey('\Software\'+strCheatEngine+'\Window Positions '+inttostr(screen.PixelsPerInch),false) or Reg.OpenKey('\Software\'+strCheatEngine+'\Window Positions',false) then
+      if Reg.OpenKey('\Software\'+strLocalAccess+'\Window Positions '+inttostr(screen.PixelsPerInch),false) or Reg.OpenKey('\Software\'+strLocalAccess+'\Window Positions',false) then
       begin
         s:=form.Name;
         s:=s+rsPosition;
@@ -3137,7 +3137,7 @@ begin
       Reg.RootKey := HKEY_CURRENT_USER;
 
       //make sure the option to save is enabled
-      if Reg.OpenKey('\Software\'+strCheatEngine,false) then
+      if Reg.OpenKey('\Software\'+strLocalAccess,false) then
       begin
         if reg.valueexists('Save window positions') then
           if reg.readbool('Save window positions') = false then
@@ -3159,7 +3159,7 @@ begin
       end;
 
 
-      if Reg.OpenKey('\Software\'+strCheatEngine+'\Window Positions '+inttostr(screen.PixelsPerInch),true) then
+      if Reg.OpenKey('\Software\'+strLocalAccess+'\Window Positions '+inttostr(screen.PixelsPerInch),true) then
       begin
         //registry is open, gather data
         buf:=tmemorystream.Create;
@@ -3221,8 +3221,8 @@ end;
 function GetRelativeFilePath(filename: string):string;
 begin
   result:=filename;
-  if pos(uppercase(CheatEngineDir),uppercase(filename))=1 then
-    result:='.\'+copy(filename,length(CheatEnginedir)+1,length(filename));
+  if pos(uppercase(LocalAccessDir),uppercase(filename))=1 then
+    result:='.\'+copy(filename,length(LocalAccessdir)+1,length(filename));
 end;
 
 
@@ -3858,7 +3858,7 @@ begin
       path:=GetTempDir;
   end;
 
-  path:=path+strCheatEngine+' Symbols';
+  path:=path+strLocalAccess+' Symbols';
 
   ForceDirectory(path);
   if warn and (messagedlg(rsThisCanTakeSomeTime, mtWarning, [mbyes, mbno], 0, mbno)<>mryes) then exit;

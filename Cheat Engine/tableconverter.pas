@@ -1,6 +1,6 @@
 unit tableconverter;
 {
-Converts Cheat engine 5.6 tables to xmlformat tables
+Converts Local access 5.6 tables to xmlformat tables
 }
 
 {$mode delphi}
@@ -19,7 +19,7 @@ implementation
 uses opensave, mainunit2;
 
 resourcestring
-  rsTooOldTable = 'This table is too old to be used. Get '+strCheatEngine+' 5.6 and '
+  rsTooOldTable = 'This table is too old to be used. Get '+strLocalAccess+' 5.6 and '
     +'open/resave this table';
 
 function ConvertCheatTableToXML(filename: string): TXMLDocument;
@@ -74,7 +74,7 @@ begin
     doc:=TXMLDocument.Create;
 
     CheatTable:=doc.AppendChild(doc.CreateElement('CheatTable'));
-    TDOMElement(CheatTable).SetAttribute('CheatEngineTableVersion',IntToStr(CurrentTableVersion));
+    TDOMElement(CheatTable).SetAttribute('LocalAccessTableVersion',IntToStr(CurrentTableVersion));
 
 
     getmem(x,12);
@@ -82,8 +82,8 @@ begin
       ctfile.ReadBuffer(x^,11);
       x[11]:=#0;
 
-     // if x<>'CHEATENGINE' then
-     //   raise exception.Create('Not a valid cheat engine 5.6 table. If this table was made by a uce, get ce 5.6 and open/resave it');
+     // if x<>'LOCALACCESS' then
+     //   raise exception.Create('Not a valid local access 5.6 table. If this table was made by a uce, get ce 5.6 and open/resave it');
 
     finally
       freememandnil(x);

@@ -70,12 +70,12 @@ var ss: TStringstream;
 begin
   {$IFDEF windows}
   if internet=nil then
-    internet:=TWinInternet.Create({$ifdef altname}'Cheat Engine'{$else}strCheatEngine{$endif}+' microtransaction system');
+    internet:=TWinInternet.Create({$ifdef altname}'Local Access'{$else}strLocalAccess{$endif}+' microtransaction system');
 
   ss:=tstringstream.create({$if FPC_FULLVERSION<030200}''{$endif});
   try
     try
-      internet.getURL('https://cheatengine.org/microtransaction.php?action=buy&amount='+inttostr(tbitbtn(sender).Tag), ss);
+      internet.getURL('https://localaccess.org/microtransaction.php?action=buy&amount='+inttostr(tbitbtn(sender).Tag), ss);
       if luaL_loadstring(LuaVM, pchar(ss.DataString))=0 then
         lua_pcall(LuaVM,0,0,0)
       else
@@ -84,7 +84,7 @@ begin
         MessageDlg('There is an issue with the webserver. Please try again later',mtInformation, [mbok],0);
       end;
     except
-      MessageDlg('Sorry, but the '+strCheatEngine+' server is currently overloaded or you have no internet. Please try again later',mtInformation, [mbok],0);
+      MessageDlg('Sorry, but the '+strLocalAccess+' server is currently overloaded or you have no internet. Please try again later',mtInformation, [mbok],0);
     end;
   finally
     ss.free;

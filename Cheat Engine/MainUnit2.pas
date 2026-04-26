@@ -23,7 +23,7 @@ const
   ceversion=7.51;
   strVersionPart='7.5.1';
 {$ifdef altname}  //i'd use $MACRO ON but fpc bugs out
-  strCheatEngine='Runtime Modifier'; //if you change this, also change it in first.pas
+  strLocalAccess='Runtime Modifier'; //if you change this, also change it in first.pas
   strCheatTable='Code Table';   //because it contains code.... duh.....
   strCheatTableLower='code table';
   strCheat='Modification';
@@ -32,7 +32,7 @@ const
   strMyCheatTables='My Mod Tables';
   strSpeedHack='Speedmodifier';
 {$else}
-  strCheatEngine='Cheat Engine';
+  strLocalAccess='Local Access';
   strCheatTable='Cheat Table';
   strCheatTableLower='cheat table';
   strCheat='Cheat';
@@ -43,9 +43,9 @@ const
 {$endif}
 
 resourcestring
-  cename = strCheatEngine;
-  cenamewithversion = strCheatEngine+' '+strVersionPart;
-  rsCheatEngine = strCheatEngine;
+  cename = strLocalAccess;
+  cenamewithversion = strLocalAccess+' '+strVersionPart;
+  rsLocalAccess = strLocalAccess;
   rsPleaseWait = 'Please Wait!';
 
 procedure UpdateToolsMenu;
@@ -167,7 +167,7 @@ begin
     reg:=Tregistry.Create;
     try
       Reg.RootKey := HKEY_CURRENT_USER;
-      if Reg.OpenKey('\Software\'+strCheatEngine,false) then
+      if Reg.OpenKey('\Software\'+strLocalAccess,false) then
       begin
 
         with formsettings do
@@ -345,11 +345,11 @@ begin
             {$endif}
 
 
-          if reg.ValueExists('Show '+strCheatEngine+' Hotkey') then
+          if reg.ValueExists('Show '+strLocalAccess+' Hotkey') then
             {$ifdef windows}
-            reg.ReadBinaryData('Show '+strCheatEngine+' Hotkey',temphotkeylist[1][0],10);
+            reg.ReadBinaryData('Show '+strLocalAccess+' Hotkey',temphotkeylist[1][0],10);
             {$else}
-            HexToBin(pchar(reg.ReadString('Show '+strCheatEngine+' Hotkey')),pchar(@temphotkeylist[1][0]),10);
+            HexToBin(pchar(reg.ReadString('Show '+strLocalAccess+' Hotkey')),pchar(@temphotkeylist[1][0]),10);
             {$endif}
 
           if reg.ValueExists('Pause process Hotkey') then
@@ -1173,7 +1173,7 @@ begin
 
       {$ifndef net}
       formsettings.lvtools.Clear;
-      if Reg.OpenKey('\Software\'+strCheatEngine+'\Tools',false) then
+      if Reg.OpenKey('\Software\'+strLocalAccess+'\Tools',false) then
       begin
         names:=TStringList.create;
         try
@@ -1211,7 +1211,7 @@ begin
 
 
 
-      if (not skipPlugins) and (Reg.OpenKey('\Software\'+strCheatEngine+'\Plugins'{$ifdef cpu64}+'64'{$else}+'32'{$endif},false)) then
+      if (not skipPlugins) and (Reg.OpenKey('\Software\'+strLocalAccess+'\Plugins'{$ifdef cpu64}+'64'{$else}+'32'{$endif},false)) then
       begin
         names:=TStringList.create;
         try

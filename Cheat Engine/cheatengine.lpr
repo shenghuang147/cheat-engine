@@ -1,4 +1,4 @@
-program cheatengine;
+program localaccess;
 
 {$mode objfpc}{$H+}
 
@@ -125,7 +125,7 @@ uses
   LuaNetworkInterface, libcepack, symbolsync, gdbserverconnectdialog,
   GDBServerDebuggerInterface;
 
-{$R cheatengine.res}
+{$R localaccess.res}
 {$IFDEF windows}
 //{$R manifest.res}  //lazarus now has this build in (but sucks as it explicitly turns of dpi aware)
 //{$R Sounds.rc}
@@ -290,8 +290,8 @@ var
   noautorun: boolean;
 
 begin
-  Application.Title:='Cheat Engine 7.5';
- //'Cheat Engine 7.3';
+  Application.Title:='Local Access 7.5';
+ //'Local Access 7.3';
   {$ifdef darwin}
   macPortFixRegPath;
   {$endif}
@@ -340,7 +340,7 @@ begin
 
     r.RootKey := HKEY_CURRENT_USER;
 
-    if r.OpenKey('\Software\'+strCheatEngine,false) then
+    if r.OpenKey('\Software\'+strLocalAccess,false) then
     begin
       if r.ValueExists('RunAsAdmin') then
       begin
